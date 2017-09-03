@@ -17,7 +17,6 @@ client.on('message', (message) => {
   let command = message.content.toLowerCase().split(" ")[0];
   command = command.slice(prefix.length);
 
-  let args = message.content.split(" ").slice(1);
   var argresult = args.join(' ');
 
   if (command === "nick" & message.author.id === '124989722668957700'){
