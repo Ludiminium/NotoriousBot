@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const settings = require('./config/settings.json')
 
 var prefix = '='
 
@@ -69,28 +70,28 @@ client.on('message', (message) => {
     channel.send('pong')
   };
 
-  if (message.content.includes('pubg')) {
+  if (message.content.toLowerCase().includes('pubg')) {
     var pubg = ['ja', 'nee', 'kom zelf pubg', 'waarom?', 'wel met esref', 'okay', 'kom csgo']
     channel.send(pubg[Math.floor(Math.random() *pubg.length)])
   }
 
 });
 
-  const cmdFiles = await readdir("./commands/");
-   console.log("log", `Loading a total of ${cmdFiles.length} commands.`);
-   cmdFiles.forEach(f => {
-     try {
-       const props = require(`./commands/${f}`);
-       if (f.split(".").slice(-1)[0] !== "js") return;
-       client.log("log", `Loading Command: ${props.help.name}. 👌`);
-       client.commands.set(props.help.name, props);
-       props.conf.aliases.forEach(alias => {
-         client.aliases.set(alias, props.help.name);
-       });
-     } catch (e) {
-       client.log(`Unable to load command ${f}: ${e}`);
-     }
-   });
+  // const cmdFiles = await readdir("./commands/");
+  //  console.log("log", `Loading a total of ${cmdFiles.length} commands.`);
+  //  cmdFiles.forEach(f => {
+  //    try {
+  //      const props = require(`./commands/${f}`);
+  //      if (f.split(".").slice(-1)[0] !== "js") return;
+  //      client.log("log", `Loading Command: ${props.help.name}. 👌`);
+  //      client.commands.set(props.help.name, props);
+  //      props.conf.aliases.forEach(alias => {
+  //        client.aliases.set(alias, props.help.name);
+  //      });
+  //    } catch (e) {
+  //      client.log(`Unable to load command ${f}: ${e}`);
+  //    }
+  //  });
 
   //login
-  client.login(token());
+  client.login(settings.token);
