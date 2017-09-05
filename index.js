@@ -76,5 +76,21 @@ client.on('message', (message) => {
 
 });
 
+  const cmdFiles = await readdir("./commands/");
+   console.log("log", `Loading a total of ${cmdFiles.length} commands.`);
+   cmdFiles.forEach(f => {
+     try {
+       const props = require(`./commands/${f}`);
+       if (f.split(".").slice(-1)[0] !== "js") return;
+       client.log("log", `Loading Command: ${props.help.name}. 👌`);
+       client.commands.set(props.help.name, props);
+       props.conf.aliases.forEach(alias => {
+         client.aliases.set(alias, props.help.name);
+       });
+     } catch (e) {
+       client.log(`Unable to load command ${f}: ${e}`);
+     }
+   });
 
-client.login(token);
+  //login
+  client.login(token());
