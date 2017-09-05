@@ -77,3 +77,4 @@ client.on('message', (message) => {
 });
 
 
+client.login(token);
