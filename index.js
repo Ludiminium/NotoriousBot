@@ -21,6 +21,8 @@ client.on('message', (message) => {
   let channel = message.channel
   let author = message.author
   let server = message.guild
+  let avatar = client.user.avatarURL;
+  let uvatar = author.avatarURL
 
 
   if (command === 'nick' & message.author.id === '124989722668957700') {
@@ -29,16 +31,22 @@ client.on('message', (message) => {
       .catch(console.error);
     };
 
-  if (command === 'rape') {
-    channel.send(`You just raped ${argresult}`)
-      .then(message => console.log(`send message: ${message.content}`))
-      .catch(console.error);
-  };
-
   if (command === 'info' || command === 'help') {
     channel.send('No embed yet so no help.')
       .then(message => console.log(`send message: ${message.content}`))
       .catch(console.error);
+  };
+
+  if (command === 'embed') {
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00AE86)
+      .setFooter(`Requested by ${author.username}`, uvatar)
+      .setThumbnail(avatar)
+      .setDescription(argresult)
+      .setTimestamp();
+    channel.send({embed})
+    .then(message => console.log('send embed: ${message.content}'))
+    .catch(console.error);
   };
 
 });
