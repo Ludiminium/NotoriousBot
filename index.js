@@ -30,13 +30,13 @@ client.on('message', (message) => {
     client.user.setUsername(argresult)
       .then(user => console.log(`My new username is ${user.username}`))
       .catch(console.error);
-    };
+    }; else
 
   if (command === 'info' || command === 'help') {
     channel.send('No embed yet so no help.')
       .then(message => console.log(`send message: ${message.content}`))
       .catch(console.error);
-  };
+  }; else
 
   if (command === 'embed') {
     const embed = new Discord.RichEmbed()
@@ -48,7 +48,7 @@ client.on('message', (message) => {
     channel.send({embed})
     .then(message => console.log('send embed: ${message.content}'))
     .catch(console.error);
-  };
+  }; else
 
 });
 
@@ -68,12 +68,12 @@ client.on('message', (message) => {
 
   if (message.content.includes('ping')) {
     channel.send('pong')
-  };
+  }; else
 
   if (message.content.toLowerCase().includes('pubg')) {
     var pubg = ['ja', 'nee', 'kom zelf pubg', 'waarom?', 'wel met esref', 'okay', 'kom csgo']
     channel.send(pubg[Math.floor(Math.random() *pubg.length)])
-  }
+  } else
 
 });
 
