@@ -2,13 +2,12 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const settings = require('./config/settings.json')
 
-var prefix = '='
-
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
 client.on('message', (message) => {
+  let prefix = settings.prefix
 
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
@@ -77,21 +76,7 @@ client.on('message', (message) => {
 
 });
 
-  // const cmdFiles = await readdir("./commands/");
-  //  console.log("log", `Loading a total of ${cmdFiles.length} commands.`);
-  //  cmdFiles.forEach(f => {
-  //    try {
-  //      const props = require(`./commands/${f}`);
-  //      if (f.split(".").slice(-1)[0] !== "js") return;
-  //      client.log("log", `Loading Command: ${props.help.name}. 👌`);
-  //      client.commands.set(props.help.name, props);
-  //      props.conf.aliases.forEach(alias => {
-  //        client.aliases.set(alias, props.help.name);
-  //      });
-  //    } catch (e) {
-  //      client.log(`Unable to load command ${f}: ${e}`);
-  //    }
-  //  });
+
 
   //login
   client.login(settings.token);
