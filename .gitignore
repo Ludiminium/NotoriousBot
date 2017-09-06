@@ -1,5 +1,4 @@
-./index.js
 *.log
 node_modules/*
 config/settings.json
-index.js
+data/*
