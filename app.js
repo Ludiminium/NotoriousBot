@@ -54,6 +54,7 @@ client.on('message', (message) => {
 
 
 client.on('message', (message) => {
+  let prefix = settings.prefix
 
   let command = message.content.toLowerCase().split(' ')[0];
   command = command.slice(prefix.length);
