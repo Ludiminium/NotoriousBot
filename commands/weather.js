@@ -1,21 +1,8 @@
 const http = require('http');
 exports.run = function(client, message, args, argresult) {
 
-	function printTime(unox){
-		var a = new Date(unox * 1000); //unix datum keer 1000
-		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; //var months een array met alle maanden aantstellen
-		var year = a.getFullYear(); //haalt de datum van dit moment op
-		var month = months[a.getMonth()];
-		var date = a.getDate();
-		var hour = a.getHours();
-		var min = a.getMinutes();
-		var sec = a.getSeconds();
-		var knakworst = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; //alle variabelen samenvoegen in een string
-		return knakworst; //stuurt string in dd/mm/yyyy format terug
-	}
-
-	function printDirection(degree){ //vult de waarde van wind.deg in en geeft de string afhangend van waarde
-		if(degree>337.5) return 'North'; //als degree groter is dan dit getal, stop functie en geef dit string
+	function printDirection(degree){
+		if(degree>337.5) return 'North';
 		if(degree>292.5) return 'North West';
 		if(degree>247.5) return 'West';
 		if(degree>202.5) return 'South West';
@@ -26,24 +13,24 @@ exports.run = function(client, message, args, argresult) {
 		return 'North';
 	}
 
-	function printError(error) { //functie om de error bericht te sturen
-		console.error(error.message); //net als console.log maar dan voor errors
+	function printError(error) {
+		console.error(error.message);
 	}
 
-	function printWeather(city, temp, windspeed, png, country, main, description, degree) { //functie om de weer uit te printen
+	function printWeather(argresult, temp, windspeed, png, country, main, description, degree) {
 		const embed = new Discord.RichEmbed()
-		.setColor(0x00AE86) //stelt kleur in
-		.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL) //jouw naam en avatar foto bij footer
-		.setTimestamp() //datum bij footer
-		.setThumbnail("http://openweathermap.org/img/w/" + png + ".png") //thumbnail met foto van weer (wolkjes)
+		.setColor(0x00AE86)
+		.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
+		.setTimestamp()
+		.setThumbnail("http://openweathermap.org/img/w/" + png + ".png")
 		.setDescription("**Temperature** \n" + temp + "°C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n")
-		.setTitle("**Weather in " + city + ", " + country + "**"); //geeft aan met de embed van welk stad dit weer is
-		message.channel.send({embed}); //reageer met de variabele met de gegevens
+		.setTitle("**Weather in " + argresult + ", " + country + "**");
+		message.channel.send({embed});
 	}
 
 	module.exports = {
-		weather: function get(city){
-			var request = http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=95dcf7b6a21897a585ce210222415fee&units=metric', function(response) {
+		weather: function get(argresult){
+			var request = http.get('http://api.openweathermap.org/data/2.5/weather?q=' + argresult + '&appid=95dcf7b6a21897a585ce210222415fee&units=metric', function(response) {
 				var body = '';
 					response.on('data', function(chunk) {
 						body += chunk;
@@ -60,7 +47,7 @@ exports.run = function(client, message, args, argresult) {
 						}
 					}
 					else {
-						message.reply('Couldnt find the weather from: **' + city + '** Error code: (' + http.STATUS_CODES[response.statusCode] + ')');
+						message.reply('Couldnt find the weather from: **' + argresult + '** Error code: (' + http.STATUS_CODES[response.statusCode] + ')');
 					}
 				});
 			});
