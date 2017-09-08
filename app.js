@@ -4,6 +4,7 @@ const settings = require('./config/settings.json');
 // const ddiff = require('return-deep-diff');
 const chalk = require('chalk')
 require('./util/eventLoader.js')(client);
+const token = require('./config/token.json')
 
 var reload = (message, cmd) => {
   delete require.cache[require.resolve('./commands/' + cmd)];
@@ -76,5 +77,5 @@ exports.reload = reload;
 
 
   //login
-  client.login(settings.token);
+  client.login(token.token);
   // client.user.setStatus(settings.status)

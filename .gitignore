@@ -1,4 +1,4 @@
 *.log
 node_modules/*
-config/settings.json
+config/token.json
 data/*
