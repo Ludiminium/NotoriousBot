@@ -21,7 +21,12 @@ var reload = (message, cmd) => {
 };
 exports.reload = reload;
 
-
+music(client, {
+    prefix: settings.prefix,
+    global: settings.global,
+    maxQueueSize: 10, // maximale videos
+    clearInvoker: false // of de bot berichten verwijdert die de music bot commando's uitvoeren
+});
 
 
 
