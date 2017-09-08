@@ -3,9 +3,14 @@ const client = new Discord.Client();
 const settings = require('./config/settings.json');
 // const ddiff = require('return-deep-diff');
 const chalk = require('chalk')
-require('./util/eventLoader.js')(client);
-const token = require('./config/token.json')
+const token = require('./config/token.json');
+const music = require('discord.js-music-v11');
+const http = require('http');
 
+//events
+require('./util/eventLoader.js')(client);
+
+//reload commands
 var reload = (message, cmd) => {
   delete require.cache[require.resolve('./commands/' + cmd)];
   try {
@@ -21,64 +26,14 @@ var reload = (message, cmd) => {
 };
 exports.reload = reload;
 
+// music
 music(client, {
     prefix: settings.prefix,
     global: settings.global,
-    maxQueueSize: 10, // maximale videos
-    clearInvoker: false // of de bot berichten verwijdert die de music bot commando's uitvoeren
+    maxQueueSize: settings.maxQueueSize,
+    clearInvoker: settings.clearInvoker
 });
 
-
-
-
-
-
-
-
-// client.on('message', (message) => {
-//   let prefix = settings.prefix
-//
-//   if (message.author.bot) return;
-//   if (!message.content.startsWith(prefix)) return;
-//
-//   let command = message.content.toLowerCase().split(' ')[0];
-//   command = command.slice(prefix.length);
-//
-//   let args = message.content.split(' ').slice(1);
-//   var argresult = args.join(' ');
-//
-//   let channel = message.channel
-//   let author = message.author
-//   let server = message.guild
-//   let avatar = client.user.avatarURL;
-//   let uvatar = author.avatarURL
-//
-//
-//   if (command === 'nick' & message.author.id === '124989722668957700') {
-//     client.user.setUsername(argresult)
-//       .then(user => console.log(`My new username is ${user.username}`))
-//       .catch(console.error);
-//     } else
-//
-//   if (command === 'info' || command === 'help') {
-//     channel.send('No embed yet so no help.')
-//       .then(message => console.log(`send message: ${message.content}`))
-//       .catch(console.error);
-//   } else
-//
-//   if (command === 'embed') {
-//     const embed = new Discord.RichEmbed()
-//       .setColor(0x00AE86)
-//       .setFooter(`Requested by ${author.username}`, uvatar)
-//       .setThumbnail(avatar)
-//       .setDescription(argresult)
-//       .setTimestamp();
-//     channel.send({embed})
-//     .then(message => console.log('send embed: ${message.content}'))
-//     .catch(console.error);
-//   };
-//
-// });
 
 
   //login
