@@ -1,9 +1,12 @@
 const chalk = require('chalk')
 const settings = require('../config/settings.json')
+const music = require('discord.js-music-v11')
 module.exports = message => {
   let prefix = settings.prefix
 
   if (message.author.bot) return;
+  if (message.content.startsWith(prefix + 'music')) return;
+  if (message.content.startsWith(prefix + 'play')) return;
   if (!message.content.startsWith(prefix)) return;
 
   let command = message.content.toLowerCase().split(' ')[0];
