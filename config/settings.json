@@ -1,3 +1,6 @@
 {
   "prefix":"=",
+  "global": false,
+  "maxQueueSize": 50,
+  "clearInvoker": true
 }
