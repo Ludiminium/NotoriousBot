@@ -19,7 +19,7 @@ module.exports = message => {
   let channel = message.channel
   let author = message.author
   let server = message.guild
-  let avatar = client.user.avatarURL;
+  let avatar = client.user.avatarURL
   let uvatar = author.avatarURL
 
   try {
@@ -28,5 +28,4 @@ module.exports = message => {
   } catch (err) {
     console.log(chalk.red(`Command ${command} failed to execute\n${err.stack}`));
   }
-
 }

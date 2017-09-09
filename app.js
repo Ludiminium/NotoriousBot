@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const settings = require('./config/settings.json');
 // const ddiff = require('return-deep-diff');
 const chalk = require('chalk')
-const token = require('./config/token.json');
+const token = require('./config/private.json');
 const music = require('discord.js-music-v11');
 const http = require('http');
 
@@ -26,7 +26,7 @@ var reload = (message, cmd) => {
 };
 exports.reload = reload;
 
-// music
+// enables music bot
 music(client, {
     prefix: settings.prefix,
     global: settings.global,
