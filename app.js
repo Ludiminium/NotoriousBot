@@ -38,4 +38,3 @@ music(client, {
 
   //login
   client.login(token.token);
-  // client.user.setStatus(settings.status)
