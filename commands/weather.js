@@ -16,6 +16,15 @@ exports.run = function(client, message, args, argresult) {
 	function printError(error) {
 		console.error(error.message);
 	}
+	
+    function printTime(unox){
+        var a = new Date(unox * 1000);
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var knakworst = 'hour + ':' + min + ':' + sec;
+        return knakworst;
+    }
 
 	function printWeather(argresult, temp, windspeed, png, country, main, description, degree) {
 		const embed = new Discord.RichEmbed()
