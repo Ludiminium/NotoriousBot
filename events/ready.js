@@ -1,6 +1,8 @@
-const chalk = require('chalk');
-const settings = require('../config/settings.json')
-module.exports = client => {
-  console.log(chalk.bgGreen.black(`I'm ready`));
-  client.user.setGame(settings.prefix)
+module.exports = async client => {
+  setTimeout(filter,1000)
+  function filter() {
+    client.log("log", `Ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, "Ready!");
+
+    client.guilds.filter(g => !client.settings.has(g.id)).forEach(g => client.settings.set(g.id, client.config.defaultSettings));
+  }
 };

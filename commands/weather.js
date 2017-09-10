@@ -57,3 +57,17 @@ exports.run = (client, message, args, argresult)	=> {
 		    message.channel.send({embed});
 		  }
 };
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "weather",
+  category: "Miscelaneous",
+  description: "Gives you the current weather in a given city.",
+  usage: "weather city"
+};
