@@ -28,7 +28,14 @@ exports.run = (client, message, args, level)	=> {
 				console.log(chalk.red(`Weather failed to execute\n${err.stack}`));
 			});
 
-
+			function printTime(unox){
+	        var a = new Date(unox * 1000);
+	        var hour = a.getHours();
+	        var min = a.getMinutes();
+	        var sec = a.getSeconds();
+	        var knakworst = hour + ':' + min + ':' + sec;
+	        return knakworst;
+	    }
 
 			function printDirection(degree){
 	  		if(degree>337.5) return 'North';
@@ -46,13 +53,13 @@ exports.run = (client, message, args, level)	=> {
 	  		console.error(error.message);
 	  	}
 
-			function printWeather(argresult, temp, windspeed, png, country, main, description, degree) {
+			function printWeather(argresult, temp, windspeed, png, country, main, description, degree, sunrise, sunset) {
 		    const embed = new Discord.RichEmbed()
 		    .setColor(0x00AE86)
 		    .setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
 		    .setTimestamp()
 		    .setThumbnail("http://openweathermap.org/img/w/" + png + ".png")
-		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n")
+		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunrise:**\n" + printTime(sunrise)  + "\n\n**Sunset:**" + printTime(sunset));
 		    .setTitle("**Weather in " + argresult + ", " + country + "**");
 		    message.channel.send({embed});
 		  }
