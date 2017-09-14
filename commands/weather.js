@@ -1,7 +1,7 @@
 const http = require('http');
-const weather = require('../util/weather');
 const Discord = require('discord.js');
-exports.run = (client, message, args, argresult)	=> {
+exports.run = (client, message, args, level)	=> {
+			var argresult = args.join(" ")
 			var request = http.get('http://api.openweathermap.org/data/2.5/weather?q=' + argresult + '&appid=95dcf7b6a21897a585ce210222415fee&units=metric', function(response) {
 			var body = '';
 				response.on('data', function(chunk) {
@@ -17,10 +17,10 @@ exports.run = (client, message, args, argresult)	=> {
 							printError(error);
 						}
 					}	else {
-						console.log('Couldnt find the weather from: **' + argresult + '** Error code: (' + http.STATUS_CODES[response.statusCode] + ')');
+						console.log('Couldnt find the weather in: **' + argresult + '** Error code: (' + http.STATUS_CODES[response.statusCode] + ')');
 						if (!argresult){
 							message.reply('Please give a city as input')
-						} else message.reply(`Couldn't find the weather of: ${argresult}, please try an other input`)
+						} else message.reply(`Couldn't find the weather of: ${argresult}, please try an other input` + http.STATUS_CODES[response.statusCode])
 					}
 				});
 			});

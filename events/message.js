@@ -11,7 +11,7 @@ module.exports = (client, message) => {
   const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  const level = client.permlevel(message);
+  const level = client.permlevel(message, command);
 
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 
