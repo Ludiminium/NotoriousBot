@@ -22,7 +22,7 @@ exports.run = function(client, message, args, argresult) {
         var hour = a.getHours();
         var min = a.getMinutes();
         var sec = a.getSeconds();
-        var knakworst = 'hour + ':' + min + ':' + sec;
+        var knakworst = hour + ':' + min + ':' + sec;
         return knakworst;
     }
 
