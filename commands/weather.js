@@ -11,7 +11,7 @@ exports.run = (client, message, args, level)	=> {
 					if (response.statusCode === 200) {
 						try{
 							var weatherAPI = JSON.parse(body);
-							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description);
+							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description, weatherAPI.sys.sunrise, weatherAPI.sys.sunset);
 							printDirection(weatherAPI.wind.deg);
 						} catch(error) {
 							printError(error);
