@@ -1,5 +1,7 @@
 *.log
 node_modules/*
-config/token.json
+config/private.json
 config/servers.json
 data/*
+events/message2.js
+app2.js

@@ -2,5 +2,6 @@
   "prefix":"=",
   "global": false,
   "maxQueueSize": 50,
-  "clearInvoker": false
+  "clearInvoker": false,
+  "status": "'online', `${client.servers.length} servers`, console.log(error)"
 }
