@@ -26,13 +26,13 @@ exports.run = function(client, message, args, argresult) {
         return knakworst;
     }
 
-	function printWeather(argresult, temp, windspeed, png, country, main, description, degree) {
+	function printWeather(argresult, temp, windspeed, png, country, main, description, degree, sunrise, sunset) {
 		const embed = new Discord.RichEmbed()
 		.setColor(0x00AE86)
 		.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
 		.setTimestamp()
 		.setThumbnail("http://openweathermap.org/img/w/" + png + ".png")
-		.setDescription("**Temperature** \n" + temp + "°C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n")
+		.setDescription("**Temperature** \n" + temp + "°C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunset:** \n" printTime(sunrise) + "\n\n**Sunset:**" + printTime(sunset));
 		.setTitle("**Weather in " + argresult + ", " + country + "**");
 		message.channel.send({embed});
 	}
@@ -48,7 +48,7 @@ exports.run = function(client, message, args, argresult) {
 					if (response.statusCode === 200) {
 						try{
 							var weatherAPI = JSON.parse(body);
-							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description);
+							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description, weatherAPI.sunrise, weatherAPI.sunset);
 							printDirection(weatherAPI.wind.deg);
 						} 
 						catch(error) {

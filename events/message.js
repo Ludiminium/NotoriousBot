@@ -1,32 +1,26 @@
-const chalk = require('chalk')
-const settings = require('../config/settings.json')
-const music = require('discord.js-music-v11')
-module.exports = message => {
-  let prefix = settings.prefix
+module.exports = (client, message) => {
 
   if (message.author.bot) return;
-  if (message.content.startsWith(prefix + 'music')) return;
-  if (message.content.startsWith(prefix + 'play')) return;
-  if (!message.content.startsWith(prefix)) return;
+  const settings = message.guild
+    ? client.settings.get(message.guild.id)
+    : client.config.defaultSettings;
+  message.settings = settings;
 
-  let command = message.content.toLowerCase().split(' ')[0];
-  command = command.slice(prefix.length);
+  if (message.content.indexOf(settings.prefix) !== 0) return;
 
-  let args = message.content.split(' ').slice(1);
-  var argresult = args.join(' ');
+  const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
 
-  let client = message.client
-  let channel = message.channel
-  let author = message.author
-  let server = message.guild
-  let avatar = client.user.avatarURL;
-  let uvatar = author.avatarURL
+  const level = client.permlevel(message, command);
 
-  try {
-    let cmdFile = require(`../commands/${command}`)
-    cmdFile.run(client, message, args, argresult);
-  } catch (err) {
-    console.log(chalk.red(`Command ${command} failed to execute\n${err.stack}`));
+  const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
+
+    if (cmd && !message.guild && cmd.conf.guildOnly)
+    return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+
+
+  if (cmd && level >= cmd.conf.permLevel) {
+    client.log("log", `${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "CMD");
+    cmd.run(client, message, args, level);
   }
-
-}
+};

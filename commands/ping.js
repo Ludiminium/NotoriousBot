@@ -1,5 +1,18 @@
-exports.run = function(client, message, args, argresult) {
-  message.channel.send(`pong: \`${Date.now() - message.createdTimestamp} ms\``);
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+  const msg = await message.channel.send("Ping?");
+  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 };
-// let m = await message.channel.send("Ping?");
-// m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "ping",
+  category: "Miscelaneous",
+  description: "pong",
+  usage: "ping"
+};
