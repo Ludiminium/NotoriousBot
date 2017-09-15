@@ -36,7 +36,7 @@ exports.run = (client, message, args, level)	=> {
 	        return knakworst;
 	    }
 
-			function setcheck(sunset){
+			function setCheck(sunset){
 				if(sunset = NaN) {
 					return 'No time';
 				}
@@ -45,7 +45,7 @@ exports.run = (client, message, args, level)	=> {
 				}
 			}
 
-			function risecheck(sunrise){
+			function riseCheck(sunrise){
 				if(sunrise = NaN) {
 					return 'No time';
 				}
