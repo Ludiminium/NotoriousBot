@@ -59,7 +59,7 @@ exports.run = (client, message, args, level)	=> {
 		    .setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
 		    .setTimestamp()
 		    .setThumbnail("http://openweathermap.org/img/w/" + png + ".png")
-		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunrise:**\n" + printTime(sunrise)  + "\n\n**Sunset:**" + printTime(sunset));
+		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunrise:**\n" + printTime(sunrise)  + "\n\n**Sunset:**" + printTime(sunset))
 		    .setTitle("**Weather in " + argresult + ", " + country + "**");
 		    message.channel.send({embed});
 		  }
