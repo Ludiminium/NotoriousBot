@@ -11,8 +11,7 @@ exports.run = (client, message, args, level)	=> {
 					if (response.statusCode === 200) {
 						try{
 							var weatherAPI = JSON.parse(body);
-							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description, weatherAPI.sys.sunrise, weatherAPI.sys.sunset);
-							printDirection(weatherAPI.wind.deg);
+							printWeather(weatherAPI.name, weatherAPI.main.temp, weatherAPI.wind.speed, weatherAPI.weather[0].icon, weatherAPI.sys.country, weatherAPI.weather[0].main, weatherAPI.weather[0].description, printTime(weatherAPI.sys.sunrise), printTime(weatherAPI.sys.sunset), printDirection(weatherAPI.wind.deg));
 						} catch(error) {
 							printError(error);
 						}
@@ -29,12 +28,17 @@ exports.run = (client, message, args, level)	=> {
 			});
 
 			function printTime(unox){
+				if(unox = NaN) {
+					return 'No time';
+				}
+				else
 	        var a = new Date(unox * 1000);
 	        var hour = a.getHours();
 	        var min = a.getMinutes();
 	        var sec = a.getSeconds();
 	        var knakworst = hour + ':' + min + ':' + sec;
 	        return knakworst;
+				}
 	    }
 
 			function printDirection(degree){
@@ -53,13 +57,17 @@ exports.run = (client, message, args, level)	=> {
 	  		console.error(error.message);
 	  	}
 
-			function printWeather(argresult, temp, windspeed, png, country, main, description, degree, sunrise, sunset) {
+			function printWeather(argresult, temp, windspeed, png, country, main, description, degree, sunrise, sunset, direction) {
 		    const embed = new Discord.RichEmbed()
 		    .setColor(0x00AE86)
 		    .setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
 		    .setTimestamp()
 		    .setThumbnail("http://openweathermap.org/img/w/" + png + ".png")
+<<<<<<< HEAD
 		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + printDirection(degree) + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunrise:**\n" + printTime(sunrise)  + "\n\n**Sunset:**" + printTime(sunset))
+=======
+		    .setDescription("**Temperature** \n" + Math.round(temp) + "�C\n\n**Wind speed** \n" + windspeed + "km/h \n\n**Wind Direction** \n" + direction + "\n\n**Weather condition** \n" + main + ", " + description + "\n\n**Sunrise:**\n" + sunrise  + "\n\n**Sunset:**" + sunset)
+>>>>>>> 4bc3e160b2291e2aa9ca1c959141e9c283a4eaee
 		    .setTitle("**Weather in " + argresult + ", " + country + "**");
 		    message.channel.send({embed});
 		  }
@@ -74,7 +82,7 @@ exports.conf = {
 
 exports.help = {
   name: "weather",
-  category: "Miscelaneous",
+  category: "Miscellaneous",
   description: "Gives you the current weather in a given city.",
   usage: "weather city"
 };
