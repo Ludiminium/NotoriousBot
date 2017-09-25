@@ -67,7 +67,6 @@ exports.run = (client, message, args, level)	=> {
 		    .setTitle("**Weather in " + argresult + ", " + country + "**");
 		    message.channel.send({embed});
 		  }
-};
 
 exports.conf = {
   enabled: true,
