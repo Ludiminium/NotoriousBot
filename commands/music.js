@@ -7,7 +7,7 @@ exports.conf = {
 
 exports.help = {
   name: "music",
-  category: "Miscelaneous",
+  category: "Miscellaneous",
   description: "Play songs in voice channels.",
   usage: "music help"
 };

@@ -52,7 +52,6 @@ class GuideBot extends Discord.Client {
 
     // Guild Owner gets an extra level, wooh!
     if (message.author.id === message.guild.owner.id) permlvl = 4;
-
     return permlvl;
   }
   /*
@@ -83,7 +82,7 @@ const init = async () => {
         client.aliases.set(alias, props.help.name);
       });
     } catch (e) {
-      client.log(`Unable to load command ${f}: ${e}`);
+      client.log(`Unable to load command ${f}: ${e} ${e.stack}`);
     }
   });
 
