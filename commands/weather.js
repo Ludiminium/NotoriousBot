@@ -68,9 +68,6 @@ exports.run = (client, message, args, level)	=> {
 		    message.channel.send({embed});
 		  }
 		}
-
-
-
 exports.conf = {
   enabled: true,
   guildOnly: false,
