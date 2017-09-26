@@ -26,7 +26,7 @@ exports.run = (client, message, args, level) => {
   // }
 
 
-    message.channel.send(`= HELP =
+message.channel.send(`= HELP =
 • Music      :: Play some dank songs
 • Ping       :: Check the latency of the bot
 • Settings   :: Some cool owner only stuff
